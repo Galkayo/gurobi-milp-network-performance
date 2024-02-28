@@ -1,0 +1,56 @@
+import gurobipy as gp
+from gurobipy import GRB
+
+try:
+    # Created a new model named "my_milp_model"
+    model = gp.Model("my_milp_model")
+
+    # Create binary decision variables
+    is_service_active = model.addVar(vtype=GRB.BINARY, name="is_service_active")
+    num_network_hops = model.addVar(vtype=GRB.BINARY, name="num_network_hops")
+    bandwidth_used = model.addVar(vtype=GRB.BINARY, name="bandwidth_used")
+
+
+    # Adding more variables
+    node1_active = model.addVar(vtype=GRB.BINARY, name="node1_active")
+    node2_active = model.addVar(vtype=GRB.BINARY, name="node2_active")
+    link1_used = model.addVar(vtype=GRB.BINARY, name="link1_used")
+
+    # Defined the objective function (modified for our unique problem)
+    model.setObjective(2 * is_service_active + 3 * num_network_hops + bandwidth_used, GRB.MAXIMIZE)
+
+
+    # Added constraints (modifed coefficients and an additional constraint)
+    model.addConstr(2 * is_service_active + 3 * num_network_hops + 5 * bandwidth_used <= 7, "capacity_constraint")
+    model.addConstr(is_service_active <= node1_active + node2_active, "service_placement") 
+
+    # Solved the optimization problem
+    model.optimize()
+
+    # Printed the values of the decision variables
+    for v in model.getVars():
+        print(f"{v.VarName} {v.X:g}")
+
+    # Printed the optimal objective function value
+    print(f"Obj: {model.ObjVal:g}")
+
+except gp.GurobiError as e:
+    print(f"Error code {e.errno}: {e}")
+
+except AttributeError:
+    print("Encountered an attribute error")
+
+
+
+
+# Optimal solution found (tolerance 1.00e-04)
+#Best objective 5.000000000000e+00, best bound 5.000000000000e+00, gap 0.0000%
+#is_service_active 1
+#num_network_hops 1
+#bandwidth_used 0
+#node1_active 1
+#node2_active 1
+#link1_used 0
+#Obj: 5
+
+
