@@ -1,9 +1,10 @@
-from gurobipy import Model, GRB
-
+from gurobipy import Model, GRB # scalling problems, how many constraints, and values, produce the why, less on the specfic, reach a point where its unsolvable, feasibility ,
+# how do we know its correct, before adding complexity see it is correct. Verfiy before moving on, write brute force method.
+# write simplier problems. 
 
 num_functions = 2
 num_nodes = 2 
-performance_gain = { (0, 0): 5, (0, 1): 8, (1, 0): 3, (1, 1): 2 }
+performance_gain = { (0, 0): 5, (0, 1): 8, (1, 0): 3, (1, 1): 2 } 
 
 
 m = Model("Simplified_Network_Placement")
@@ -39,3 +40,20 @@ if m.status == GRB.OPTIMAL:
     print(f"Total Performance: {m.objVal:.2f}")
 else:
     print("No solution found") 
+
+
+
+
+# Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+#Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+# Thread count was 1 (of 8 available processors)
+
+# Solution count 1: 11 
+
+# Optimal solution found (tolerance 1.00e-04)
+# Best objective 1.100000000000e+01, best bound 1.100000000000e+01, gap 0.0000%
+# Optimal Solution:
+# Function 1 placed on Node 2
+# Function 2 placed on Node 1
+# Total Performance: 11.00
+    

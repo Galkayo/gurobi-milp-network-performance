@@ -9,7 +9,7 @@ resource_usage = {1: 30, 2: 20, 3: 15, 4: 45, 5: 25}
 
 # Linear Approximation for Latency (Less Complexity)
 def latency_cost(usage):
-    cost_per_unit = 0.2  # A single slope for the cost
+    cost_per_unit = 0.3  # A single slope for the cost
     return cost_per_unit * usage
 
 # Gurobi Model Creation
