@@ -15,7 +15,12 @@ def latency_cost(usage):
 # Gurobi Model Creation
 model = Model("Network Function Placement")
 
-x = {}  # Regular decision variables for function placement
+x = {}  # Regular decision variables for function placement 
+y = {}
+z = {}
+for i in range(1, num_functions + 1):
+    x[i] = model.addVar(vtype=GRB.BINARY, name=f"x_{i}")
+
 for i in range(1, num_functions + 1):
     x[i] = model.addVar(vtype=GRB.BINARY, name=f"x_{i}")
 
