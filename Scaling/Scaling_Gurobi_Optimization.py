@@ -1,5 +1,7 @@
-from gurobipy import Model, GRB
-
+from gurobipy import Model, GRB # random value generator 1. no solution, hard code no solution. 2. solution, gurobi cant find it (really diffcult and it takes hours to solve it). (hourly, multihour, 30 minutes) 3. maybe a solution buy gurobi cant find it. # random generator, 
+# solving linear equations where x+y = c
+# start problems on those increasing complexity
+# reading how specfically gurobi, how gurobi solves problems and hit the wall, and measure it. 
 m = Model("Complex_Scaling_Gurobi")
 
 # Decision variables
